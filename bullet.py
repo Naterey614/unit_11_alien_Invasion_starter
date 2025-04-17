@@ -1,3 +1,9 @@
+"""
+Bullet Module
+
+This module contains the bullet class which handles bullet creation, movement, and handling
+"""
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
@@ -6,7 +12,23 @@ if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
 
 class Bullet(Sprite):
+    """
+    A class to represent a bullet fired by the player's ship
+
+    Args:
+        screen (pygame.Surface): The game screen where the bullet is rendered.
+        settings (Settings): The game settings.
+        image (pygame.Surface): The image of the bullet.
+        rect (pygame.rect): The rectangle representing the bullet.
+        y (float): The bullets y coordinate.
+    """
     def __init__(self, game: 'AlienInvasion'):
+        """
+        Initialize the bullet and set its starting position.
+
+        Args:
+            game (AlienInvasion): The main game instance.
+        """
         super().__init__()
 
         self.screen = game.screen
@@ -20,8 +42,14 @@ class Bullet(Sprite):
         self.y = float(self.rect.y)
 
     def update(self):
+        """
+        updates bullet y position
+        """
         self.y -= self.settings.bullet_speed
         self.rect.y = self.y
 
     def draw_bullet(self):
+        """
+        Draw/render the bullet
+        """
         self.screen.blit(self.image, self.rect)
